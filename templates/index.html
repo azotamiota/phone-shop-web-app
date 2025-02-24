@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPhone Models</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>iPhone Models</h1>
+    <table>
+        <tr>
+            <th>Phone</th>
+            <th>Price</th>
+        </tr>
+        {% for phone, price in iphone_models %}
+        <tr>
+            <td>{{ phone }}</td>
+            <td>${{ price }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

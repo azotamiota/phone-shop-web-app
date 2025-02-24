@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: sqlpad
+  name: sqlpad
+  namespace: dps-qa
+spec:
+  containers:
+  - image: sqlpad/sqlpad:latest
+    name: sqlpad
+    resources: {}
+    ports:
+    - containerPort: 3000
+    env:
+            - name: SQLPAD_ADMIN
+              value: "admin"
+            - name: SQLPAD_ADMIN_PASSWORD
+              value: "adminpass"
+            - name: SQLPAD_PORT
+              value: "3000"
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: sqlpad
+  name: sqlpad-service
+  namespace: dps-qa
+spec:
+  clusterIP: 192.168.9.18
+  clusterIPs:
+  - 192.168.9.18
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - nodePort: 31853
+    port: 3030
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    run: sqlpad
+  sessionAffinity: None
+  type: NodePort
