@@ -16,5 +16,5 @@ if [[ "$3" == "refs/heads/main" || "$4" == "pull_request" ]]; then
 elif [[ "$1" == "build" ]]; then
     docker build -t "$5/iphone-shop-app:$2" .
 elif [[ "$1" == "push" ]]; then
-    docker push "$5/iphone-shop-app:$2" .
+    docker push "$5/iphone-shop-app:$2"
 fi
