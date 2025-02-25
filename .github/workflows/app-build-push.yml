@@ -36,4 +36,4 @@ jobs:
         run: ./scripts/docker_action.sh build "${{ github.sha }}" "${{ github.ref }}" "${{ github.event_name }}" "${{ vars.DOCKERHUB_USERNAME }}"
 
       - name: Push Docker Image
-        run: ./scripts/docker_action.sh push ${{ github.sha }} ${{ github.ref }} ${{ github.event_name }}
+        run: ./scripts/docker_action.sh push ${{ github.sha }} ${{ github.ref }} ${{ github.event_name }} ${{ vars.DOCKERHUB_USERNAME }}
