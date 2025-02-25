@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: postgres-pod
+  name: postgres-pod
+spec:
+  containers:
+  - image: postgres
+    name: postgres-pod
+    resources: {}
+    env:
+    - name: PGPASSWORD
+      value: ${DB_PASSWORD}
+    command:
+    - /bin/sh
+    - -c
+    - | 
+      psql -h ${DB_ENDPOINT} -U pgown -d ${DB_NAME} -p 5432 -c "SELECT * FROM iphone_prices;"
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
