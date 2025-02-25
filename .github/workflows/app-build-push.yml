@@ -33,9 +33,7 @@ jobs:
         run: ./secrets/decrypt_secrets.sh
 
       - name: Build Docker Image
-        run: |
-          docker build -t ${{ vars.DOCKERHUB_USERNAME }}/iphone-shop-app:$COMMIT_SHA .
+        run: ./scripts/docker_action.sh build $COMMIT_SHA
 
       - name: Push Docker Image
-        run: |
-          docker push ${{ vars.DOCKERHUB_USERNAME }}/iphone-shop-app:$COMMIT_SHA
+        run: ./scripts/docker_action.sh push $COMMIT_SHA
