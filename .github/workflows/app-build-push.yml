@@ -26,7 +26,7 @@ jobs:
         run: |
           echo "$GPG_PRIVATE_KEY" | gpg --batch --import
           echo "GPG key imported successfully"
-          
+
       - name: Decrypt Secrets
         run: ./secrets/decrypt_secrets.sh
 
@@ -37,4 +37,5 @@ jobs:
 
       - name: Push Docker Image
         run: |
+          COMMIT_SHA=$(git rev-parse --short HEAD)
           docker push ${{ vars.DOCKERHUB_USERNAME }}/terraform-tools:$COMMIT_SHA
